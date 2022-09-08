@@ -1,4 +1,5 @@
 <?php
+namespace model; 
 class Product
 {
     public $SKU;

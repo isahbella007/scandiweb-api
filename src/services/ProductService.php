@@ -1,6 +1,5 @@
 <?php
 
-
 class ProductService
 {
 
@@ -15,26 +14,26 @@ class ProductService
     {
         $query = "SELECT * FROM products ORDER BY SKU";
         $stmt = $this->databaseConnection->query($query);
-        $product_arr = array(); 
-        $product_arr['data'] = array(); 
+        $product_arr = array();
+        $product_arr['data'] = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            extract($row); 
+            extract($row);
 
             $product_item = array(
-                'SKU' => $SKU, 
-                'name' => $name, 
-                'price' => $price, 
-                'productType' => $product_type, 
+                'SKU' => $SKU,
+                'name' => $name,
+                'price' => $price,
+                'productType' => $product_type,
                 'productDetail' => $product_detail
-            ); 
-            array_push($product_arr['data'], $product_item); 
+            );
+            array_push($product_arr['data'], $product_item);
         }
 
         return $product_arr;
     }
 
-    public function AddProduct( $data)
+    public function AddProduct($data)
     {
         $query = "INSERT INTO products (SKU, name, price, product_type, product_detail) VALUES (:SKU, :name, :price, :productType, :productDetail)";
         $stmt = $this->databaseConnection->prepare($query);
@@ -49,10 +48,11 @@ class ProductService
         return $this->databaseConnection->lastInsertId();
     }
 
-    public function MassDelete( $id){
+    public function MassDelete($id)
+    {
         $productIds =  implode("','", $id);
-        $query = "DELETE FROM products WHERE SKU IN ('".$productIds."')"; 
-        $stmt = $this->databaseConnection->prepare($query); 
-        $stmt->execute(); 
+        $query = "DELETE FROM products WHERE SKU IN ('" . $productIds . "')";
+        $stmt = $this->databaseConnection->prepare($query);
+        $stmt->execute();
     }
 }

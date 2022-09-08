@@ -1,10 +1,10 @@
 <?php
 
-require('./src/model/product.php');
+include('./src/model/product.php');
 class ProductController{ 
 
     public $service; 
-    public function __construct( ProductService $service)
+    public function __construct(ProductService $service)
     {
         $this->service = $service; 
     }
@@ -20,7 +20,7 @@ class ProductController{
         }
         if(strtolower($method) == 'post'){ 
             $data = json_decode(file_get_contents("php://input"), true) ; 
-            $productObject = new Product($data["SKU"], $data["name"], $data["price"], $data["productType"],  $data["productDetail"]);
+            $productObject = new model\Product($data["SKU"], $data["name"], $data["price"], $data["productType"],  $data["productDetail"]);
             // print_r( $productObject); 
             $this->service->AddProduct($productObject);
             return json_encode([
