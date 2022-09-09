@@ -1,4 +1,9 @@
 <?php
+namespace src\Config;
+
+use PDO;
+use PDOException;
+
 class Connection
 {
     // Database Parameters

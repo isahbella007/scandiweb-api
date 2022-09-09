@@ -1,5 +1,10 @@
 <?php
 
+namespace src\Services;
+
+use PDO;
+use src\Config\Connection;
+
 class ProductService
 {
 
