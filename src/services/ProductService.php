@@ -38,7 +38,7 @@ class ProductService
         return $product_arr;
     }
 
-    public function AddProduct($data)
+    public function addProduct($data)
     {
         $query = "INSERT INTO products (SKU, name, price, product_type, product_detail) VALUES (:SKU, :name, :price, :productType, :productDetail)";
         $stmt = $this->databaseConnection->prepare($query);
@@ -53,7 +53,7 @@ class ProductService
         return $this->databaseConnection->lastInsertId();
     }
 
-    public function MassDelete($id)
+    public function massDelete($id)
     {
         $productIds =  implode("','", $id);
         $query = "DELETE FROM products WHERE SKU IN ('" . $productIds . "')";

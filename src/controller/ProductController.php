@@ -16,8 +16,6 @@ class ProductController
     }
     public function processRequest($method): void
     {
-        // base the request on the process method
-        // if there is an id, that means I am dealing with a specific data else I am dealing with a collection. 
         $this->processCollectionRequest($method);
     }
 
@@ -30,7 +28,7 @@ class ProductController
             $data = json_decode(file_get_contents("php://input"), true);
             $productObject = new Product($data["SKU"], $data["name"], $data["price"], $data["productType"],  $data["productDetail"]);
             // print_r( $productObject); 
-            $this->service->AddProduct($productObject);
+            $this->service->addProduct($productObject);
             return json_encode([
                 "message" => "Product Added"
             ]);
@@ -38,7 +36,7 @@ class ProductController
         try {
             if (strtolower($method) == 'delete') {
                 $data = json_decode(file_get_contents("php://input"), true);
-                $this->service->MassDelete($data);
+                $this->service->massDelete($data);
 
                 return json_encode([
                     "message" => "Product Deleted"

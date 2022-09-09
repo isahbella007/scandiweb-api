@@ -1,4 +1,5 @@
 <?php
+
 namespace src\Config;
 
 use PDO;
@@ -7,16 +8,14 @@ use PDOException;
 class Connection
 {
     // Database Parameters
-    // private $host = 'localhost';
+
     private $host = 'localhost';
-    // private $db_name = 'godwddul_scandiweb_test';
-    // private $username = 'godwddul_scandibella';
-    // private $password = '?hcPO5uo63IZ';
+    private $db_name = 'godwddul_scandiweb_test';
+    private $username = 'godwddul_scandibella';
+    private $password = '?hcPO5uo63IZ';
     private $conn;
 
-    private $db_name = 'scandiweb_test';
-    private $username = 'root';
-    private $password = '';
+
 
     // Connect to the DB 
     public function connect()
