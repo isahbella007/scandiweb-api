@@ -63,3 +63,4 @@ class Product
         $this->product_detail = $product_detail;
     }
 }
+?>

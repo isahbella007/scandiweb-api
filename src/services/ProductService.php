@@ -40,17 +40,28 @@ class ProductService
 
     public function addProduct($data)
     {
-        $query = "INSERT INTO products (SKU, name, price, product_type, product_detail) VALUES (:SKU, :name, :price, :productType, :productDetail)";
-        $stmt = $this->databaseConnection->prepare($query);
-        $stmt->execute(array(
-            ":SKU" => $data->getSKU(),
-            ":name" => $data->getName(),
-            ":price" => $data->getPrice(),
-            ":productType" => $data->getProductType(),
-            ":productDetail" => $data->getProductDetail()
-        ));
+        $checkId = $data->getSKU();
+        $checkQuery = "SELECT * FROM products WHERE SKU = '$checkId' "; 
+        $checkStmt = $this->databaseConnection->prepare($checkQuery); 
+        $checkStmt->execute(); 
+        $result = $checkStmt->fetch(PDO::FETCH_ASSOC); 
 
-        return $this->databaseConnection->lastInsertId();
+        if($result){ 
+            echo "Sorry, there is an item with this ID"; 
+        }else{ 
+            $query = "INSERT INTO products (SKU, name, price, product_type, product_detail) VALUES (:SKU, :name, :price, :productType, :productDetail)";
+            $stmt = $this->databaseConnection->prepare($query);
+            $stmt->execute(array(
+                ":SKU" => $data->getSKU(),
+                ":name" => $data->getName(),
+                ":price" => $data->getPrice(),
+                ":productType" => $data->getProductType(),
+                ":productDetail" => $data->getProductDetail()
+            ));
+    
+            return $this->databaseConnection->lastInsertId();
+        }
+       
     }
 
     public function massDelete($id)

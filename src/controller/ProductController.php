@@ -27,7 +27,6 @@ class ProductController
         if (strtolower($method) == 'post') {
             $data = json_decode(file_get_contents("php://input"), true);
             $productObject = new Product($data["SKU"], $data["name"], $data["price"], $data["productType"],  $data["productDetail"]);
-            // print_r( $productObject); 
             $this->service->addProduct($productObject);
             return json_encode([
                 "message" => "Product Added"
@@ -47,3 +46,4 @@ class ProductController
         }
     }
 }
+?>

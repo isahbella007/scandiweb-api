@@ -11,7 +11,8 @@ require './vendor/autoload.php';
 // set_exception_handler("ErrorHandler::handleException");
 header("Content-Type: application/json; charset=UTF-8");
 // header("Access-Control-Allow-Origin: https://fancy-marshmallow-3cf372.netlify.app"); 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:3000"); 
+// header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");
 header("Access-Control-Allow-Credentials: true");
 header("Accept-Encoding: deflate");
@@ -35,3 +36,5 @@ $service = new ProductService($database);
 $controller = new ProductController($service);
 
 $controller->processRequest($_SERVER['REQUEST_METHOD']);
+
+?>
